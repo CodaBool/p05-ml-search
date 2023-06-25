@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "build": "webpack --config webpack.config.js --mode=production"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.js --mode=production"
   },
   "browserslist": {
     "production": [
