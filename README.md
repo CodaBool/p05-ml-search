@@ -1,4 +1,6 @@
-# This is a sample of a production application used internally
+# Sample
+> This is a sample of a production application used internally
+
 Read more at https://codabool.com
 
 ### About
