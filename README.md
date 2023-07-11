@@ -1,7 +1,8 @@
-# Sample
-> This is a sample of a production application used internally
+# Confluence Search
+> This is a sample of a production application used internally from my work at Ellucian
 
-Read more at https://codabool.com
+# 🖊️ Details
+> You can find a detailed blog post about this project [here](https://codabool.com/blog/14)
 
 ### About
 The production version of this app uses a machine learning search engine which was provided hundreds of thousands of lines of json data.
