@@ -1,6 +1,0 @@
-{
-  "name": "p05-ml-search-main",
-  "region": "us-east-1",
-  "accelerated": false,
-  "url": "https://p05-ml-search-main.s3.amazonaws.com"
-}
