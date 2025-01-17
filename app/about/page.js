@@ -1,9 +1,12 @@
+"use client"
+
 import React from 'react'
+import { Container } from 'react-bootstrap'
 import Row from 'react-bootstrap/Row'
 
 export default function About() {
   return (
-    <>
+    <Container>
       <h1 className="display-1 my-5">About</h1>
       <h4 className="text-muted text-center">
         A Company Search engine for Confluence, JIRA, and a ticketing system.
@@ -17,8 +20,8 @@ export default function About() {
         I worked to develop Python scripts which could store the data and then load it into the search engine.
         Then Elastic Search offers an API which is called to get results based on the search terms.
         These results are ordered by their confidence ratio.
-        
-        <br/><br/>
+
+        <br /><br />
         &emsp;
         I configured this to work on an AWS EC2, the requirements for ElasticSearch JVM is large as it by default requires 1GB of RAM.
         I scaled up the instance to a t2.Medium and was able to setup nginx which handled incoming requests.
@@ -33,7 +36,7 @@ export default function About() {
         Putting all Confluence Articles (where the company stored documentation) indiscriminately into the search engine could expose sensitive information.
         Especially considering Ellucian serves Higher Education customers who have students protected under FERPA, a federal law for keeping data secure similar to the medical HIPPA laws.
 
-        <br/><br/>
+        <br /><br />
         &emsp;
         I wrote the documentation for how I configured the engine and nginx.
         This involved systemctl commands, nginx config files, Python commands, installation guide.
@@ -45,8 +48,8 @@ export default function About() {
         There I included a search bar at the top navigation but it does not perform any search as of right now.
         I am using React and a npm package would be ideal for this solution.
         For now I am glad I learned more about Python scripting and the Elastic Search engine.
-        Overall this project was a great experience.  
+        Overall this project was a great experience.
       </p>
-    </>
+    </Container>
   )
 }

@@ -1,3 +1,7 @@
+'use client'
+
+
+
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -7,17 +11,12 @@ import Spinner from 'react-bootstrap/Spinner'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import { X, Search } from 'react-bootstrap-icons'
-import { debounce, DEBOUNCE_TIME, axios } from './constants'
-import Result from './Components/Result'
-import data from './constants/data.json'
+import { debounce, DEBOUNCE_TIME, axios } from '../constants'
+import Result from '../components/Result'
+import data from '../constants/data.json'
+import { Container } from 'react-bootstrap'
 
-// Bootstrap React Components
-// https://react-bootstrap.netlify.app/components/forms
-
-// Bootstrap React Icons
-// https://icons.getbootstrap.com
-
-export default function SearchPage() {
+export default function Navigation() {
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState([])
   const input = useRef(null)
@@ -36,7 +35,7 @@ export default function SearchPage() {
     setLoading(true)
     startDebounce(e.target.value)
   }
-  
+
   function performSearch(query) {
     setLoading(false)
     setResults(data)
@@ -44,31 +43,43 @@ export default function SearchPage() {
 
   // performance function to limit the call to only once the user stops typing
   const startDebounce = useCallback(
-		debounce(value => performSearch(value), DEBOUNCE_TIME), // 1000ms
-		[] // will be created only once initially
+    debounce(value => performSearch(value), DEBOUNCE_TIME), // 1000ms
+    [] // will be created only once initially
   )
 
   return (
-    <>
+    <Container>
       <h1 className="display-1 my-2"><Search className="mb-4 mr-4 sway" size={60} />Search</h1>
       <Form className="my-4 mx-auto w-100" onSubmit={(e) => e.preventDefault()}>
         <Tabs defaultActiveKey="search">
           <Tab eventKey="search" title="Search">
-            <InputGroup className="my-5">
+            {/* <InputGroup className="my-5"> */}
+            {/*
+                <InputGroup className="">
+                  <InputGroup.Text>@</InputGroup.Text>
+                  <Form.Control placeholder="Username" />
+                </InputGroup>
+
+                <InputGroup.Prepend onClick={clear}>
+                  <InputGroup.Text>Clear <X className="mt-1 p-0" size={20} /></InputGroup.Text>
+                </InputGroup.Prepend> */}
+
+            <InputGroup className="my-3">
               <FormControl ref={input} autoFocus onChange={handleSearch} placeholder="Search Here" />
-              <InputGroup.Prepend onClick={clear}>
-                <InputGroup.Text>Clear <X className="mt-1 p-0" size={20} /></InputGroup.Text>
-              </InputGroup.Prepend>
+
+              <InputGroup.Text id="basic-addon2" onClick={clear} style={{ cursor: "pointer" }}>Clear <X className="mt-1 p-0" size={20} /></InputGroup.Text>
             </InputGroup>
-            {loading 
-              ? 
-                <Row>
-                  <Spinner animation="border" variant="info" className="mx-auto" />
-                </Row>
+
+            {/* </InputGroup> */}
+            {loading
+              ?
+              <Row>
+                <Spinner animation="border" variant="info" className="mx-auto" />
+              </Row>
               :
-                results.map(result => (
-                  <Result result={result} key={result._id}/>
-                ))
+              results.map(result => (
+                <Result result={result} key={result._id} />
+              ))
             }
           </Tab>
           <Tab eventKey="settings" title="Settings">
@@ -85,6 +96,7 @@ export default function SearchPage() {
           </Tab>
         </Tabs>
       </Form>
-    </>
+
+    </Container>
   )
 }

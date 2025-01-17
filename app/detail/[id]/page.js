@@ -1,15 +1,17 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
+"use client"
+import { use } from 'react'
+import { useRouter } from 'next/navigation'
 import { ArrowLeft, FileEarmarkText } from 'react-bootstrap-icons'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import allData from './constants/data.json'
-import useScreen from './constants/useScreen'
+import allData from '../../../constants/data.json'
+import useScreen from '../../../constants/useScreen'
+import { Container } from 'react-bootstrap'
 
-export default function Detail({ result }) {
-  const history = useHistory()
-  const id = history.location.pathname.substring(8) // removes '/detail/'
+export default function Detail({ params }) {
+  const router = useRouter()
+  const { id } = use(params)
   const data = getDataById(id)
   let screen = useScreen()
   if (!screen) screen = 'medium'
@@ -25,14 +27,14 @@ export default function Detail({ result }) {
   }
 
   console.log(data)
-  
+
   return (
-    <>
-      <Button className="mt-4" variant="outline-secondary" onClick={() => history.push('/')}>
+    <Container>
+      <Button className="mt-4" variant="outline-secondary" onClick={() => router.push('/')}>
         <ArrowLeft className="mb-1 mr-3" size={22} />
         <p className="d-inline">Back</p>
       </Button>
-      {data && 
+      {data &&
         <>
           <Row className="mt-3">
             <Col>
@@ -41,7 +43,7 @@ export default function Detail({ result }) {
                 ? <FileEarmarkText className="mb-4 ml-3" size={30} />
                 : <FileEarmarkText className="mb-4 ml-3" size={60} />
               }
-              
+
             </Col>
           </Row>
           <Row>
@@ -57,6 +59,6 @@ export default function Detail({ result }) {
           </Row>
         </>
       }
-    </>
+    </Container>
   )
 }

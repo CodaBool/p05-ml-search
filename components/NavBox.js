@@ -1,6 +1,5 @@
+"use client"
 import { useRef, useEffect, useState } from 'react'
-import codeImg from '../img/navBox-code.png'
-import homeImg from '../img/navBox-home.png'
 
 export default function NavBox() {
   let screen = useScreen()
@@ -26,7 +25,7 @@ export default function NavBox() {
     }
   }
 
-  
+
   function expand(ref) {
     if (screen.includes('small')) { // Small, screen width <= 991px
       if (ref.current.id === "img-code") {
@@ -53,61 +52,61 @@ export default function NavBox() {
 
   return (
     <div className="navBox">
-      <img src={homeImg} ref={imgHome} id="img-home" />
+      <img src="/navBox-home.png" ref={imgHome} id="img-home" />
       <a href="https://codabool.com/projects" ref={home} className="navBox-btn" id="btn-home" onMouseEnter={() => expand(imgHome)} onMouseLeave={() => contract(imgHome)}>GO HOME</a>
       <a href="https://github.com/CodaBool/p05-ml-search" ref={code} className="navBox-btn" id="btn-code" onMouseEnter={() => expand(imgCode)} onMouseLeave={() => contract(imgCode)}>SEE CODE</a>
-      <img src={codeImg} ref={imgCode} id="img-code" />
+      <img src="/navBox-code.png" ref={imgCode} id="img-code" />
     </div>
   )
 }
 
 
 function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
+  var timeout;
+  return function () {
+    var context = this, args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
 };
 
 function useScreen() {
-	const [screenType, setScreenType] = useState(getScreenType());
-	const resizeEvent = debounce(() => {
-		setScreenType(getScreenType())
-	}, 100);
+  const [screenType, setScreenType] = useState(getScreenType());
+  const resizeEvent = debounce(() => {
+    setScreenType(getScreenType())
+  }, 100);
 
-	useEffect(() => {
-		window.addEventListener('resize', resizeEvent);
-		return () => {
-			window.removeEventListener('resize', resizeEvent);
-		};
-	}, [])
+  useEffect(() => {
+    window.addEventListener('resize', resizeEvent);
+    return () => {
+      window.removeEventListener('resize', resizeEvent);
+    };
+  }, [])
 
-	return screenType;
+  return screenType;
 }
 
 function getScreenType() {
-	let screenType = null;
+  let screenType = null;
 
-	if (typeof window !== 'undefined') {
-		if (window.matchMedia('(max-width: 575px)').matches) {
-			screenType = 'xsmall';
-		} else if (window.matchMedia('(max-width: 768px)').matches) {
-			screenType = 'small';
-		} else if (window.matchMedia('(max-width: 991px)').matches) {
-			screenType = 'medium';
-		} else if (window.matchMedia('(max-width: 1199px)').matches) {
-			screenType = 'large';
-		} else {
-			screenType = 'xlarge';
-		}
-	}
-	return screenType;
+  if (typeof window !== 'undefined') {
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      screenType = 'xsmall';
+    } else if (window.matchMedia('(max-width: 768px)').matches) {
+      screenType = 'small';
+    } else if (window.matchMedia('(max-width: 991px)').matches) {
+      screenType = 'medium';
+    } else if (window.matchMedia('(max-width: 1199px)').matches) {
+      screenType = 'large';
+    } else {
+      screenType = 'xlarge';
+    }
+  }
+  return screenType;
 }
